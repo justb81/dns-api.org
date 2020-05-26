@@ -13,11 +13,6 @@
 # Default port
 port=5001
 
-# Magic-user?
-if [ "$USER" = "s-dns-org" ]; then
-    port=$(id -u)
-fi
-
 # Launch
-echo "Launching on 127.0.0.1:$port"
-exec plackup -s Twiggy --workers=4 --host 127.0.0.1 -p $port -a ./bin/dns-api --access-log logs/access.$(date +%Y-%m-%d).log -E production
+echo "Launching on Port $port"
+exec plackup -s Twiggy --workers=4 -p $port -a ./bin/dns-api -E production
